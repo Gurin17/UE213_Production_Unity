@@ -114,3 +114,5 @@ ProjectSettings/EditorBuildSettings.asset
 ProjectSettings/ProjectVersion.txt
 ProjectSettings/ShaderGraphSettings.asset
 ProjectSettings/VFXManager.asset
+Assets/VFX_Scene.unity
+Assets/VFX_Scene.unity.meta
