@@ -22,13 +22,19 @@ public class InputInteractions : MonoBehaviour
         PathFollower pathFollower = vehicle.GetComponent<PathFollower>();
         float tempOffset = pathFollower.offset - pathFollower.widthOffset;
         pathFollower.offset = Mathf.Max(tempOffset, -pathFollower.widthOffset);
+
+        CarAnimation carAnimation = vehicle.GetComponentInChildren<CarAnimation>();
+        carAnimation.LeanLeft();
     }
 
     public void Right()
     {
-
         PathFollower pathFollower = vehicle.GetComponent<PathFollower>();
         float tempOffset = pathFollower.offset + pathFollower.widthOffset;
         pathFollower.offset = Mathf.Min(tempOffset, pathFollower.widthOffset);
+
+        
+        CarAnimation carAnimation = vehicle.GetComponentInChildren<CarAnimation>();
+        carAnimation.LeanRight();
     }
 }
