@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3539486141002242557}
   - component: {fileID: 5085003006137054356}
   - component: {fileID: 2445857315578371895}
+  - component: {fileID: 422930386475663749}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3067143427147582729}
   serializedVersion: 2
   m_LocalRotation: {x: -0.017829984, y: -0, z: -0, w: 0.99984103}
-  m_LocalPosition: {x: 0, y: 2.93, z: -5.76}
+  m_LocalPosition: {x: 0, y: 2.92, z: -5.95}
   m_LocalScale: {x: 0, y: 0, z: 2.9665668}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92,6 +93,50 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3067143427147582729}
   m_Enabled: 1
+--- !u!114 &422930386475663749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3067143427147582729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &5931631138473887040
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +203,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 69903e459431dd34b8a96b81c9d43e03, type: 3}
-  m_Resource: {fileID: 8300000, guid: 69903e459431dd34b8a96b81c9d43e03, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1fa753d7e7d51b6418af24c7cdcd68e4, type: 3}
+  m_Resource: {fileID: 8300000, guid: 1fa753d7e7d51b6418af24c7cdcd68e4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.727
   m_Pitch: 1
@@ -371,7 +416,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ecca973e59e1bf64ca490f6d46755a6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
