@@ -72,3 +72,45 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+.vsconfig
+Assets/AddressableAssetsData.meta
+Assets/AddressableAssetsData/AddressableAssetSettings.asset
+Assets/AddressableAssetsData/AddressableAssetSettings.asset.meta
+Assets/AddressableAssetsData/AssetGroups.meta
+Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset
+Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset.meta
+Assets/AddressableAssetsData/AssetGroups/Schemas.meta
+Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_BundledAssetGroupSchema.asset
+Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_BundledAssetGroupSchema.asset.meta
+Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_ContentUpdateGroupSchema.asset
+Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_ContentUpdateGroupSchema.asset.meta
+Assets/AddressableAssetsData/AssetGroupTemplates.meta
+Assets/AddressableAssetsData/AssetGroupTemplates/Packed Assets.asset
+Assets/AddressableAssetsData/AssetGroupTemplates/Packed Assets.asset.meta
+Assets/AddressableAssetsData/DataBuilders.meta
+Assets/AddressableAssetsData/DataBuilders/BuildScriptFastMode.asset
+Assets/AddressableAssetsData/DataBuilders/BuildScriptFastMode.asset.meta
+Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedMode.asset
+Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedMode.asset.meta
+Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedPlayMode.asset
+Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedPlayMode.asset.meta
+Assets/AddressableAssetsData/DefaultObject.asset
+Assets/AddressableAssetsData/DefaultObject.asset.meta
+Assets/Art/VFX.meta
+Assets/InputSystem_Actions.cs
+Assets/Smoke_vfx.vfx
+Assets/Smoke_vfx.vfx.meta
+Packages/manifest.json
+Packages/packages-lock.json
+ProjectSettings/EditorBuildSettings.asset
+ProjectSettings/ProjectVersion.txt
+ProjectSettings/ShaderGraphSettings.asset
+ProjectSettings/VFXManager.asset
+UpgradeLog.htm
+Assets/InputSystem_Actions.cs
+Packages/manifest.json
+Packages/packages-lock.json
+ProjectSettings/EditorBuildSettings.asset
+ProjectSettings/ProjectVersion.txt
+ProjectSettings/ShaderGraphSettings.asset
+ProjectSettings/VFXManager.asset
