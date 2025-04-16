@@ -48,6 +48,7 @@ namespace PathCreation.Examples
                 float tempOffset = offset - widthOffset;
                 offset = Mathf.Max(tempOffset, -widthOffset);
             }
+
         }
 
         void InputSystem_Actions.IVehicleActions.OnRight(InputAction.CallbackContext context)

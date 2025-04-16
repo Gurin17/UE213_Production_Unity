@@ -6,11 +6,13 @@ using UnityEngine;
 public class CollectibleCreatorEditor : Editor
 {
     SerializedProperty prefabs;
+    SerializedProperty speedChanges;
 
 
     private void OnEnable()
     {
         prefabs = serializedObject.FindProperty("prefabs");
+        speedChanges = serializedObject.FindProperty("speedVariationsList");
     }
 
     public override void OnInspectorGUI()
@@ -32,6 +34,16 @@ public class CollectibleCreatorEditor : Editor
         myScript.beatsBetweenSpawn = EditorGUILayout.IntField("Beat gap between spawn", myScript.beatsBetweenSpawn);
         myScript.spawnGroupSize = EditorGUILayout.IntField("Spawn group size", myScript.spawnGroupSize);
         myScript.beatsBetweenGroup = EditorGUILayout.IntField("Beat gap between group", myScript.beatsBetweenGroup);
+
+        GUILayout.Space(10);
+        
+        serializedObject.Update();
+        EditorGUILayout.PropertyField(speedChanges, true);
+        serializedObject.ApplyModifiedProperties();
+
+        GUILayout.Space(5);
+
+
         if (GUILayout.Button("Generate Random Path"))
         {
             myScript.GenerateRandomPath();

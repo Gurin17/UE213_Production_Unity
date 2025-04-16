@@ -20,6 +20,8 @@ public class CollectibleCreator : MonoBehaviour
     public Int32 beatsBetweenGroup;
     public Int32 beatsBeforeSpawning;
 
+    public SpeedVariation[] speedVariationsList;
+
     // Saves Manager
     public string fileName;
 
@@ -322,5 +324,13 @@ public class CollectibleCreator : MonoBehaviour
         // Height offset of spawing vehicle
         public float heightOffset;
         public EndOfPathInstruction endOfPathInstruction;
+    }
+
+    [System.Serializable]
+
+    public struct SpeedVariation
+    {
+        public int percentage;
+        public float speed;
     }
 }
