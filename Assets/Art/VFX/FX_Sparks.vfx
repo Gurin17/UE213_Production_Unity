@@ -33,12 +33,6 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614922}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661614934}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614939}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 8926484042661614942}
       id: 0
       isStickyNote: 0
@@ -52,7 +46,7 @@ MonoBehaviour:
     x: 293
     y: -1465
     width: 1035
-    height: 2296
+    height: 2506
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -374,7 +368,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.8
+      m_SerializableObject: 0.25
     m_Space: -1
   m_Property:
     name: A
@@ -408,7 +402,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1.2
+      m_SerializableObject: 0.55
     m_Space: -1
   m_Property:
     name: B
@@ -2920,7 +2914,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614934}
   - {fileID: 8926484042661614939}
   - {fileID: 8926484042661614952}
-  m_UIPosition: {x: 878, y: 250}
+  m_UIPosition: {x: 878, y: 460}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -3270,7 +3264,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.5
+      m_SerializableObject: 1
     m_Space: -1
   m_Property:
     name: _Emissive_strength
@@ -3367,7 +3361,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.01
+      m_SerializableObject: 0.005
     m_Space: -1
   m_Property:
     name: A
@@ -3401,7 +3395,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.025
+      m_SerializableObject: 0.0025
     m_Space: -1
   m_Property:
     name: B
@@ -3465,7 +3459,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":-0.024078369140625,"value":0.098236083984375,"inTangent":-0.016044359654188157,"outTangent":-0.016044359654188157,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.98724365234375,"value":-0.01256561279296875,"inTangent":-0.06087139993906021,"outTangent":-0.06087139993906021,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":-0.024078369140625,"value":0.059597015380859378,"inTangent":-0.016044359654188157,"outTangent":-0.016044359654188157,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.909698486328125,"value":-0.01674652099609375,"inTangent":0.01896158792078495,"outTangent":0.01896158792078495,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: -1
   m_Property:
     name: Size
@@ -3556,7 +3550,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.9924528002738953,"g":0.9768457412719727,"b":0.0,"a":1.0},"time":0.08824292570352555},{"color":{"r":1.0,"g":0.10588235408067703,"b":0.005660295486450195,"a":1.0},"time":0.652948796749115}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":16.94837760925293,"g":5.501567840576172,"b":0.0,"a":1.0},"time":0.1282368153333664},{"color":{"r":55.71524429321289,"g":5.899260997772217,"b":0.3153647482395172,"a":1.0},"time":0.6882429122924805}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":0}'
     m_Space: -1
   m_Property:
     name: gradient
