@@ -1,5 +1,1 @@
 # UE213 Production Unity
-
-Notion: [LINK](https://www.notion.so/1d516169d73a80b487a9c7766a5232dc?v=52c16169d73a836a83f388f6a6081d8e&pvs=4)
-
-Miro: [LINK](https://miro.com/welcomeonboard/QVNML2NCRVprOEpGdk94U0JHRXBEbTNpVVFIWlp2RVhuU011S3ZLLzdHYXRadjJudkRKVlNjd2RyNHlxTExob1g4K1p3NnhUSjhtTzI4Njg0TWZXWjloZ1JiTGtkUlVnNEZlVWtSSWRWaEpJaUNYeWlqYSsvQUw0RVRIdnlQVndQdGo1ZEV3bUdPQWRZUHQzSGl6V2NBPT0hdjE=?share_link_id=783118422593)
