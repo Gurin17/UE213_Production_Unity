@@ -1479,7 +1479,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0041656494140625,"value":0.207550048828125,"inTangent":0.19660940766334535,"outTangent":0.19660940766334535,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.993377685546875,"value":0.3878898620605469,"inTangent":0.003488666145130992,"outTangent":0.003488666145130992,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.03713938593864441,"value":0.2000712901353836,"inTangent":0.0780576840043068,"outTangent":0.0780576840043068,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.993377685546875,"value":0.3878898620605469,"inTangent":-0.008723393082618714,"outTangent":-0.008723393082618714,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: -1
   m_Property:
     name: Size
@@ -1994,7 +1994,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":0.5282368063926697},{"color":{"r":0.2528302073478699,"g":0.2528302073478699,"b":0.2528302073478699,"a":1.0},"time":0.956466019153595}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":2}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.5471698045730591,"g":0.5471698045730591,"b":0.5471698045730591,"a":1.0},"time":0.10000763088464737},{"color":{"r":0.2528302073478699,"g":0.2528302073478699,"b":0.2528302073478699,"a":1.0},"time":0.956466019153595}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":2}'
     m_Space: -1
   m_Property:
     name: gradient
@@ -2304,7 +2304,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 2.5
+      m_SerializableObject: 0.5
     m_Space: -1
   m_Property:
     name: A
@@ -2338,7 +2338,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 3.5
+      m_SerializableObject: 1
     m_Space: -1
   m_Property:
     name: B
