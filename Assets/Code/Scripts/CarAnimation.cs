@@ -28,8 +28,6 @@ public class CarAnimation : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(isLeaning);
-
         if (!isLeaning) return;
 
         timer += Time.deltaTime;

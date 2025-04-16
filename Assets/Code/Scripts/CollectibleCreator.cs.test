@@ -137,7 +137,9 @@ public class CollectibleCreator : MonoBehaviour
         foreach (CollectibleData collectibleData in saveObject.collectibles)
         {
             float distance = baseDistance + secPerBeat * vehicleData.speed * collectibleData.beat;
+
             Debug.Log(distance);
+
             // Spawn the collectible
             Vector3 spawnPosition = new Vector3();
             Quaternion spawnRotation = pathCreator.path.GetRotationAtDistance(distance, vehicleData.endOfPathInstruction) * Quaternion.Euler(0, 0, 90);
@@ -208,10 +210,18 @@ public class CollectibleCreator : MonoBehaviour
         // Loop through all the beats of the music
         for (var i = startingBeat; i < totalBeats; i++)
         {
+            // Calculate progress percent along the path
+            float progress = distance / pathCreator.path.length * 100f;
+            Debug.Log("Distance: " + distance + ", Path Length: " + pathCreator.path.length + ", Progress: " + progress);
+
+            // Get adjusted speed based on the progress
+            float adjustedSpeed = GetSpeedAtProgress(progress);
+            Debug.Log("Adjusted Speed: " + adjustedSpeed);
 
             if (distance < pathCreator.path.length)
             {
-                Debug.Log(distance);
+                Debug.Log("Spawning at Distance: " + distance);
+
                 // Spawn collectible
                 Vector3 spawnPosition = new Vector3();
                 Quaternion spawnRotation = pathCreator.path.GetRotationAtDistance(distance, currentVehicle.endOfPathInstruction) * Quaternion.Euler(0, 0, 90);
@@ -232,27 +242,24 @@ public class CollectibleCreator : MonoBehaviour
                 currentGroupSize++;
             }
 
-
             Int32 multiplier = 1;
 
             // End of group
             if (currentGroupSize >= spawnGroupSize)
             {
-                // Prepare gap between groups
                 i = i + beatsBetweenGroup;
                 multiplier = beatsBetweenGroup + 1;
                 spawnOffset = offsets[UnityEngine.Random.Range(0, offsets.Length)];
-
                 currentGroupSize = 0;
             }
-            // Prepare gap between spawn if group is not finish
             else if (beatsBetweenSpawn > 0)
             {
                 i = i + beatsBetweenSpawn;
                 multiplier = beatsBetweenSpawn + 1;
             }
 
-            distance += secPerBeat * currentVehicle.speed * multiplier;
+            // Update distance
+            distance += secPerBeat * adjustedSpeed * multiplier;
         }
     }
 
@@ -287,6 +294,20 @@ public class CollectibleCreator : MonoBehaviour
         collectible.transform.rotation = spawnRotation;
         collectible.transform.position = pathCreator.path.GetPointAtDistance(distance, currentVehicle.endOfPathInstruction) + (collectible.transform.right * inCollectible.offset) + (collectible.transform.up * inCollectible.heightOffset);
         collectible.transform.parent = transform;
+    }
+
+    private float GetSpeedAtProgress(float progress)
+    {
+        foreach (SpeedVariation variation in speedVariationsList)
+        {
+            if (progress >= variation.percentage / 100f)
+            {
+                Debug.Log(variation.speed);
+                return variation.speed;
+            }
+        }
+
+        return speedVariationsList[speedVariationsList.Length - 1].speed;
     }
 
     [System.Serializable]
