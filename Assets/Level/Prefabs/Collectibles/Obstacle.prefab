@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 590364381998773281}
   - component: {fileID: 5190809732636690155}
   - component: {fileID: 6345574807760777142}
-  - component: {fileID: 8075564588439747619}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Collectible
@@ -109,15 +108,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8075564588439747619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033822839321833552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 987cbfa38dadf744cabf348ca9e44f61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
