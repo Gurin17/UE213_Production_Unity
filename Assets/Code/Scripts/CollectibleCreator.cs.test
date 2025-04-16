@@ -354,4 +354,12 @@ public class CollectibleCreator : MonoBehaviour
         public int percentage;
         public float speed;
     }
+
+    [System.Serializable]
+
+    public struct CollectibleObject
+    {
+        public float spawnRate;
+        public GameObject prefab;
+    }
 }
