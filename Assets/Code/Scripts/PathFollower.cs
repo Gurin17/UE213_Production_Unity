@@ -15,7 +15,10 @@ namespace PathCreation.Examples
         public float widthOffset;
         public float offsetSpeed = 1.0f;
         public float heightOffset = 0.0f;
+        public Vector3 vehiculeRotation;
+        public bool startFromEnd = false;
         public float offset { get; set; }
+        public float timeToTravel { get; set; }
 
         private float distanceTravelled;
         private float currentOffset;
@@ -56,36 +59,52 @@ namespace PathCreation.Examples
             }
         }
 
-        void Start() 
+        void Start()
         {
+            currentOffset = offset;
+            distanceTravelled = 0f;
             if (pathCreator != null)
             {
                 // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
                 pathCreator.pathUpdated += OnPathChanged;
-            }
 
-            currentOffset = offset;
+                if (startFromEnd)
+                {
+                    distanceTravelled = pathCreator.path.length;
+                }
+            }
         }
 
         void Update()
         {
             if (pathCreator != null)
             {
-                distanceTravelled += speed * Time.deltaTime;
+                if (startFromEnd)
+                {
+                    distanceTravelled -= speed * Time.deltaTime;
+                }
+                else
+                {
+                    distanceTravelled += speed * Time.deltaTime;
+                }
 
                 currentOffset = Mathf.MoveTowards(currentOffset, offset, Time.deltaTime * offsetSpeed);
 
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + (transform.right * currentOffset) + (transform.up * heightOffset);
-                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction) * Quaternion.Euler(0, 0, 90);
+                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction) * Quaternion.Euler(vehiculeRotation.x, vehiculeRotation.y, vehiculeRotation.z);
 
             }
         }
 
         // If the path changes during the game, update the distance travelled so that the follower's position on the new path
         // is as close as possible to its position on the old path
-        void OnPathChanged() 
+        void OnPathChanged()
         {
             distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
+        }
+        public void ComputeTravelTime()
+        {
+            timeToTravel = (pathCreator.path.length / ((speed * Time.deltaTime) * (1f / Time.deltaTime)));
         }
     }
 }
