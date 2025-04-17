@@ -6,7 +6,6 @@ using UnityEngine;
 public class CollectibleCreatorEditor : Editor
 {
     SerializedProperty prefabs;
-    SerializedProperty obstaclePrefabs;
     SerializedProperty speedChanges;
 
 
@@ -14,7 +13,6 @@ public class CollectibleCreatorEditor : Editor
     {
         prefabs = serializedObject.FindProperty("prefabs");
         speedChanges = serializedObject.FindProperty("speedVariationsList");
-        obstaclePrefabs = serializedObject.FindProperty("obstaclePrefabs");
     }
 
     public override void OnInspectorGUI()
@@ -27,12 +25,6 @@ public class CollectibleCreatorEditor : Editor
         EditorGUILayout.PropertyField(prefabs, true);
         serializedObject.ApplyModifiedProperties();
 
-        myScript.obstacleSpawnChance = EditorGUILayout.Slider("Obstacle spawn chance", myScript.obstacleSpawnChance, 0.0f, 100.0f);
-        
-        serializedObject.Update();
-        EditorGUILayout.PropertyField(obstaclePrefabs, true);
-        serializedObject.ApplyModifiedProperties();
-        
         GUILayout.Space(20);
 
         EditorGUILayout.LabelField("Random Path Generator", EditorStyles.boldLabel);
