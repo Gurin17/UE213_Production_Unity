@@ -113,6 +113,7 @@ public class CollectibleCreator : MonoBehaviour
         }
     }
 
+    /*
     private void GeneratePathFromData(SaveObject saveObject)
     {
         VehicleData vehicleData = saveObject.vehicleData;
@@ -122,8 +123,6 @@ public class CollectibleCreator : MonoBehaviour
         float secPerBeat = 60f / beatData.audioBpm;
 
         float baseDistance = beatData.firstBeatOffset;
-        Debug.Log($"Initial Speed: {getCurrentSpeed(0f, pathCreator.path.length)}");
-        Debug.Log($"Base Distance: {baseDistance}");
 
         Dictionary<CollectibleType, GameObject> collectibleByType = new();
         foreach (GameObject coll in prefabs)
@@ -182,6 +181,79 @@ public class CollectibleCreator : MonoBehaviour
             }
         }
     }
+    */
+
+    private void GeneratePathFromData(SaveObject saveObject)
+    {
+        VehicleData vehicleData = saveObject.vehicleData;
+        BeatData beatData = saveObject.beatData;
+
+        //Calculate the number of seconds in each beat
+        float secPerBeat = 60f / beatData.audioBpm;
+
+        float baseDistance = beatData.firstBeatOffset * getCurrentSpeed(0f, pathCreator.path.length);
+
+        Dictionary<CollectibleType, GameObject> collectibleByType = new();
+        foreach (GameObject coll in prefabs)
+        {
+            Collectible collectibleScript = coll.GetComponent<Collectible>();
+            if (collectibleScript != null)
+            {
+                collectibleByType.Add(collectibleScript.type, coll);
+            }
+        }
+
+        foreach (GameObject coll in obstaclePrefabs)
+        {
+            Collectible collectibleScript = coll.GetComponent<Collectible>();
+            if (collectibleScript != null)
+            {
+                collectibleByType.Add(collectibleScript.type, coll);
+            }
+        }
+
+
+        foreach (CollectibleData collectibleData in saveObject.collectibles)
+        {
+            //float distance = baseDistance + secPerBeat * vehicleData.speed * collectibleData.beat;
+            
+            float distance = baseDistance;
+
+            for (int beat = 0; beat < collectibleData.beat; beat++)
+            {
+                float currentSpeed = getCurrentSpeed(distance, pathCreator.path.length);
+                distance += secPerBeat * currentSpeed;
+            }
+            
+            
+            Debug.Log(distance);
+            // Spawn the collectible
+            Vector3 spawnPosition = new Vector3();
+            Quaternion spawnRotation = pathCreator.path.GetRotationAtDistance(distance, vehicleData.endOfPathInstruction) * Quaternion.Euler(0, 0, 90);
+
+            GameObject collectibleBase;
+            collectibleByType.TryGetValue(collectibleData.type, out collectibleBase);
+
+            if (collectibleBase != null)
+            {
+                GameObject collectible = Instantiate(collectibleBase, spawnPosition, spawnRotation);
+                collectible.transform.localScale = collectibleData.scale;
+                collectible.transform.position = pathCreator.path.GetPointAtDistance(distance, vehicleData.endOfPathInstruction) + (collectible.transform.right * collectibleData.offset) + (collectible.transform.up * collectibleData.heightOffset);
+                collectible.transform.parent = transform;
+
+                Collectible collectibleScript = collectible.GetComponent<Collectible>();
+
+                if (collectibleScript != null)
+                {
+                    collectibleScript.type = collectibleData.type;
+                    collectibleScript.heightOffset = collectibleData.heightOffset;
+                    collectibleScript.beat = collectibleData.beat;
+                    collectibleScript.offset = collectibleData.offset;
+                }
+            }
+
+        }
+    }
 
     public void GenerateRandomPath()
     {
@@ -232,9 +304,8 @@ public class CollectibleCreator : MonoBehaviour
 
             if (distance < pathCreator.path.length)
             {
-                Debug.Log(distance);
-                Debug.Log(getCurrentSpeed(distance, pathCreator.path.length));
                 // Spawn collectible
+                Debug.Log($"Spawning collectible at distance: {distance}");
                 Vector3 spawnPosition = new Vector3();
                 Quaternion spawnRotation = pathCreator.path.GetRotationAtDistance(distance, currentVehicle.endOfPathInstruction) * Quaternion.Euler(0, 0, 90);
 
