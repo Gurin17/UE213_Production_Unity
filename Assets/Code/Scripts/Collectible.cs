@@ -62,6 +62,7 @@ public enum CollectibleType {
     Point,
     Barrier,
     Cone,
-    StopSign
+    StopSign,
+    LaneSwitch,
 
 };
