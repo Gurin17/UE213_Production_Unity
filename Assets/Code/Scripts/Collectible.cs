@@ -49,5 +49,7 @@ public class Collectible : MonoBehaviour
 
 
 public enum CollectibleType { 
-    Cube
+    Point,
+    Obstacle
+
 };
