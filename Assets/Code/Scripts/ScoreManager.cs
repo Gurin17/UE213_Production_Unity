@@ -106,7 +106,7 @@ public class ScoreManager : MonoBehaviour
     {
         // Update score, combo multiplier text, and slider value
         scoreText.text = $"{score}";
-        comboMultiplierText.text = $"x{comboMultiplier}";
+        comboMultiplierText.text = $"x{comboMultiplier}";   
         comboSlider.value = comboProgress;
     }
 

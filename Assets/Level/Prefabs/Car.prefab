@@ -191,9 +191,11 @@ MonoBehaviour:
   endOfPathInstruction: 0
   speed: 8
   speedVariationsList: []
-  widthOffset: 1
+  widthOffset: 1.3
   offsetSpeed: 3
   heightOffset: 0.15
+  vehiculeRotation: {x: 0, y: 0, z: 90}
+  startFromEnd: 0
 --- !u!82 &2698222013777484478
 AudioSource:
   m_ObjectHideFlags: 0

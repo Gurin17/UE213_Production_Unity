@@ -8,6 +8,8 @@ public class Collectible : MonoBehaviour
     public Int32 beat;
     public float offset;
 
+    public bool isObstacle;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,21 +44,24 @@ public class Collectible : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            switch (type)
+            if (isObstacle)
             {
-                case CollectibleType.Point:
-                    ScoreManager.instance.collectElement(0.3f);
-                    Destroy(gameObject);
-                    break;
-                case CollectibleType.Obstacle:
-                    ScoreManager.instance.looseCombo();
-                    break;
+                ScoreManager.instance.looseCombo();
+                Destroy(gameObject);
+                return;
             }
+
+            ScoreManager.instance.collectElement(0.3f);
+            Destroy(gameObject);
         }
     }
 }
 
 
 public enum CollectibleType { 
-    Cube
+    Point,
+    Barrier,
+    Cone,
+    StopSign
+
 };
