@@ -18,10 +18,10 @@ MonoBehaviour:
     m_Value: 10
   intensity:
     m_OverrideState: 1
-    m_Value: 0.036
+    m_Value: 0.114
   response:
     m_OverrideState: 1
-    m_Value: 0.77
+    m_Value: 0.8
   texture:
     m_OverrideState: 1
     m_Value: {fileID: 2800000, guid: 105d0ead56627f94fa03b586713bc0cd, type: 3}
