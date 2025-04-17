@@ -120,8 +120,6 @@ namespace PathCreation.Examples
 
             foreach (var variation in speedVariationsList)
             {
-                Debug.Log("Percentage: " + distance / pathCreator.path.length * 100);
-
                 if (variation.percentage > distance / pathCreator.path.length * 100)
                 {
                     return variation.speed;

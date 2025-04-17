@@ -42,7 +42,16 @@ public class Collectible : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            switch (type)
+            {
+                case CollectibleType.Point:
+                    ScoreManager.instance.collectElement(0.3f);
+                    Destroy(gameObject);
+                    break;
+                case CollectibleType.Obstacle:
+                    ScoreManager.instance.looseCombo();
+                    break;
+            }
         }
     }
 }
