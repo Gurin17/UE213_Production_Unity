@@ -49,7 +49,7 @@ Material:
     - _Cull: 1
     - _DstBlend: 10
     - _Normal_Treshold: 0.5
-    - _OutLine_Thickness: 0.18
+    - _OutLine_Thickness: 0.17
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
