@@ -90,16 +90,16 @@ public class CollectibleCreator : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(saveObject);
-        File.WriteAllText(Application.dataPath + "/Saves/" + fileName + ".json", json);
+        File.WriteAllText(Application.dataPath + "/Resources/" + fileName + ".json", json);
 
     }
 
     public void Load()
     {
-        string filePath = Application.dataPath + "/Saves/" + fileName + ".json";
-        if (File.Exists(filePath))
+        TextAsset targetFile = Resources.Load<TextAsset>(fileName);
+        if (targetFile)
         {
-            string saveString = File.ReadAllText(filePath);
+            string saveString = targetFile.text;
 
             for (int i = transform.childCount - 1; i >= 0; i--)
             {
