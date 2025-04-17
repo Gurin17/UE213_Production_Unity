@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using static CollectibleCreator;
-
 public class CollectibleCreator : MonoBehaviour
 {
     public PathCreator pathCreator;
@@ -192,7 +190,11 @@ public class CollectibleCreator : MonoBehaviour
         }
 
         // Initialize base distance and offsets
-        float distance = beatAnalyzer.firstBeatOffset * currentVehicle.speed;
+        
+        //float distance = beatAnalyzer.firstBeatOffset * currentVehicle.speed;
+        
+        float distance = beatAnalyzer.firstBeatOffset * getCurrentSpeed(0f);
+        
         Int32 currentGroupSize = 0;
         float[] offsets = { -currentVehicle.widthOffset, 0f, currentVehicle.widthOffset };
         // Random offset
@@ -203,7 +205,7 @@ public class CollectibleCreator : MonoBehaviour
         Int32 totalBeats = (Int32)(beatAnalyzer.musicClip.length / secPerBeat);
 
         Int32 startingBeat = Mathf.Min(Mathf.Max(beatsBeforeSpawning, 0), totalBeats - 1);
-        distance += secPerBeat * currentVehicle.speed * startingBeat;
+        distance += secPerBeat * getCurrentSpeed(0f) * startingBeat;
 
         // Loop through all the beats of the music
         for (var i = startingBeat; i < totalBeats; i++)
@@ -252,7 +254,8 @@ public class CollectibleCreator : MonoBehaviour
                 multiplier = beatsBetweenSpawn + 1;
             }
 
-            distance += secPerBeat * currentVehicle.speed * multiplier;
+            Debug.Log("Current PERCENT: " + getCurrentSpeed(distance));
+            distance += secPerBeat * getCurrentSpeed(distance) * multiplier;
         }
     }
 
@@ -287,6 +290,25 @@ public class CollectibleCreator : MonoBehaviour
         collectible.transform.rotation = spawnRotation;
         collectible.transform.position = pathCreator.path.GetPointAtDistance(distance, currentVehicle.endOfPathInstruction) + (collectible.transform.right * inCollectible.offset) + (collectible.transform.up * inCollectible.heightOffset);
         collectible.transform.parent = transform;
+    }
+
+    float getCurrentSpeed(float distance)
+    {
+        if (speedVariationsList.Length == 0) return vehicle.GetComponent<PathFollower>().speed;
+        if (distance <= 0f) return speedVariationsList[0].speed;
+
+        if (distance >= pathCreator.path.length) return speedVariationsList[speedVariationsList.Length - 1].speed;
+
+        foreach (var variation in speedVariationsList)
+        {
+            if (variation.percentage > distance / pathCreator.path.length * 100)
+            {
+                return variation.speed;
+            }
+        }
+
+
+        return speedVariationsList[0].speed;
     }
 
     [System.Serializable]

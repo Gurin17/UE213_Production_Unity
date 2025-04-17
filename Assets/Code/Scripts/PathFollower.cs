@@ -12,6 +12,9 @@ namespace PathCreation.Examples
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
+
+        public SpeedVariation[] speedVariationsList;
+
         public float widthOffset;
         public float offsetSpeed = 1.0f;
         public float heightOffset = 0.0f;
@@ -88,6 +91,8 @@ namespace PathCreation.Examples
                 {
                     distanceTravelled += speed * Time.deltaTime;
                 }
+                
+                speed = getSpeedVariation(distanceTravelled);
 
                 currentOffset = Mathf.MoveTowards(currentOffset, offset, Time.deltaTime * offsetSpeed);
 
@@ -107,5 +112,30 @@ namespace PathCreation.Examples
         {
             timeToTravel = (pathCreator.path.length / ((speed * Time.deltaTime) * (1f / Time.deltaTime)));
         }
+
+        private float getSpeedVariation(float distance)
+        {
+            if (speedVariationsList.Length == 0) return speed;
+            
+
+            foreach (var variation in speedVariationsList)
+            {
+                Debug.Log("Percentage: " + distance / pathCreator.path.length * 100);
+
+                if (variation.percentage > distance / pathCreator.path.length * 100)
+                {
+                    return variation.speed;
+                }
+            }
+
+            return speed;
+        }
+    }
+
+    [Serializable]
+    public struct SpeedVariation
+    {
+        public int percentage;
+        public float speed;
     }
 }

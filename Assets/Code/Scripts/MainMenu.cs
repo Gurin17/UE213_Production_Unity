@@ -6,12 +6,17 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(2);
+        Debug.Log("Play Game button clicked");
+        SceneManager.LoadSceneAsync(1);
     }
 
     public void EndGame()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
     void Start()
     {
