@@ -938,11 +938,51 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -495219583996405781, guid: 81f2bb7a31d42fe45b3c1ed3f7ffcfab,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 706d2f9c26bce6b409c0f739c4f01ab4, type: 2}
+    - target: {fileID: -365335124981599843, guid: 81f2bb7a31d42fe45b3c1ed3f7ffcfab,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4cdc48b2caea08a489cb6ca89269aa5d, type: 2}
     - target: {fileID: 919132149155446097, guid: 81f2bb7a31d42fe45b3c1ed3f7ffcfab,
         type: 3}
       propertyPath: m_Name
       value: Toyota_MR2_VF
       objectReference: {fileID: 0}
+    - target: {fileID: 3280305842729900409, guid: 81f2bb7a31d42fe45b3c1ed3f7ffcfab,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 706d2f9c26bce6b409c0f739c4f01ab4, type: 2}
+    - target: {fileID: 5457328556389502195, guid: 81f2bb7a31d42fe45b3c1ed3f7ffcfab,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4cdc48b2caea08a489cb6ca89269aa5d, type: 2}
+    - target: {fileID: 5694059874591286030, guid: 81f2bb7a31d42fe45b3c1ed3f7ffcfab,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 15ed14ac36d260348a2b90f4842f0f3a, type: 2}
+    - target: {fileID: 5694059874591286030, guid: 81f2bb7a31d42fe45b3c1ed3f7ffcfab,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5f868808f9e42704fafea3c1af63e868, type: 2}
+    - target: {fileID: 6839015535056931758, guid: 81f2bb7a31d42fe45b3c1ed3f7ffcfab,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 706d2f9c26bce6b409c0f739c4f01ab4, type: 2}
+    - target: {fileID: 8755100067906975780, guid: 81f2bb7a31d42fe45b3c1ed3f7ffcfab,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 706d2f9c26bce6b409c0f739c4f01ab4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
