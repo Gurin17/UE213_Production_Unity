@@ -93,5 +93,27 @@ namespace PathCreation.Examples
         {
             timeToTravel = (pathCreator.path.length / ((speed * Time.deltaTime) * (1f / Time.deltaTime)));
         }
+        private float getSpeedVariation(float distance)
+        {
+            if (speedVariationsList.Length == 0) return speed;
+            
+
+            foreach (var variation in speedVariationsList)
+            {
+                if (variation.percentage > distance / pathCreator.path.length * 100)
+                {
+                    return variation.speed;
+                }
+            }
+
+            return speed;
+        }
+    }
+
+    [Serializable]
+    public struct SpeedVariation
+    {
+        public int percentage;
+        public float speed;
     }
 }
