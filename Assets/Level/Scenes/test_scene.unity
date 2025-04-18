@@ -2786,7 +2786,7 @@ MonoBehaviour:
   followBehavior: 1
   speed: 0.2
   heightOffset: 0
-  vehiculeRotation: {x: 0, y: 90, z: 0}
+  vehiculeRotation: {x: 90, y: -90, z: 0}
   startFromEnd: 0
   curve:
     serializedVersion: 2
