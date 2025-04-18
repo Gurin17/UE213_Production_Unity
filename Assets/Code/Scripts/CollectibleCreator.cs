@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using static CollectibleCreator;
-
 public class CollectibleCreator : MonoBehaviour
 {
     public PathCreator pathCreator;
     public GameObject vehicle;
     public GameObject[] prefabs;
+    public GameObject[] obstaclePrefabs;
+    public float obstacleSpawnChance = 0;
 
     // Random Path Creator
     public GameObject prefab;
@@ -55,7 +55,8 @@ public class CollectibleCreator : MonoBehaviour
                     beat = collectible.beat,
                     offset = collectible.offset,
                     heightOffset = collectible.heightOffset,
-                    scale = collectible.transform.localScale
+                    scale = collectible.transform.localScale,
+                    rotation = collectible.transform.rotation
                 };
 
                 saveObject.collectibles.Add(item);
@@ -90,16 +91,15 @@ public class CollectibleCreator : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(saveObject);
-        File.WriteAllText(Application.dataPath + "/Saves/" + fileName + ".json", json);
-
+        File.WriteAllText(Application.dataPath + "/Resources/" + fileName + ".json", json); 
     }
 
     public void Load()
     {
-        string filePath = Application.dataPath + "/Saves/" + fileName + ".json";
-        if (File.Exists(filePath))
+        TextAsset targetFile = Resources.Load<TextAsset>(fileName);
+        if (targetFile)
         {
-            string saveString = File.ReadAllText(filePath);
+            string saveString = targetFile.text;
 
             for (int i = transform.childCount - 1; i >= 0; i--)
             {
@@ -112,7 +112,6 @@ public class CollectibleCreator : MonoBehaviour
 
         }
     }
-
     private void GeneratePathFromData(SaveObject saveObject)
     {
         VehicleData vehicleData = saveObject.vehicleData;
@@ -121,7 +120,7 @@ public class CollectibleCreator : MonoBehaviour
         //Calculate the number of seconds in each beat
         float secPerBeat = 60f / beatData.audioBpm;
 
-        float baseDistance = beatData.firstBeatOffset * vehicleData.speed;
+        float baseDistance = beatData.firstBeatOffset * getCurrentSpeed(0f, pathCreator.path.length);
 
         Dictionary<CollectibleType, GameObject> collectibleByType = new();
         foreach (GameObject coll in prefabs)
@@ -133,10 +132,26 @@ public class CollectibleCreator : MonoBehaviour
             }
         }
 
+        foreach (GameObject coll in obstaclePrefabs)
+        {
+            Collectible collectibleScript = coll.GetComponent<Collectible>();
+            if (collectibleScript != null)
+            {
+                collectibleByType.Add(collectibleScript.type, coll);
+            }
+        }
+
 
         foreach (CollectibleData collectibleData in saveObject.collectibles)
         {
-            float distance = baseDistance + secPerBeat * vehicleData.speed * collectibleData.beat;
+            float distance = baseDistance;
+
+            for (int beat = 0; beat < collectibleData.beat; beat++)
+            {
+                float currentSpeed = getCurrentSpeed(distance, pathCreator.path.length);
+                distance += secPerBeat * currentSpeed;
+            }
+
             Debug.Log(distance);
             // Spawn the collectible
             Vector3 spawnPosition = new Vector3();
@@ -150,9 +165,15 @@ public class CollectibleCreator : MonoBehaviour
                 GameObject collectible = Instantiate(collectibleBase, spawnPosition, spawnRotation);
                 collectible.transform.localScale = collectibleData.scale;
                 collectible.transform.position = pathCreator.path.GetPointAtDistance(distance, vehicleData.endOfPathInstruction) + (collectible.transform.right * collectibleData.offset) + (collectible.transform.up * collectibleData.heightOffset);
+                collectible.transform.rotation = collectibleData.rotation; // Applique la rotation sauvegardée
                 collectible.transform.parent = transform;
 
                 Collectible collectibleScript = collectible.GetComponent<Collectible>();
+
+                if (collectible.GetComponent<LaneSwitch>() != null) {
+                    int offsetIndex = Array.IndexOf(new float[] { -vehicleData.widthOffset, 0f, vehicleData.widthOffset }, collectibleData.offset);                    
+                    collectible.GetComponent<LaneSwitch>().setMaterialbyLane(offsetIndex);
+                }
 
                 if (collectibleScript != null)
                 {
@@ -162,7 +183,6 @@ public class CollectibleCreator : MonoBehaviour
                     collectibleScript.offset = collectibleData.offset;
                 }
             }
-
         }
     }
 
@@ -192,7 +212,11 @@ public class CollectibleCreator : MonoBehaviour
         }
 
         // Initialize base distance and offsets
-        float distance = beatAnalyzer.firstBeatOffset * currentVehicle.speed;
+        
+        //float distance = beatAnalyzer.firstBeatOffset * currentVehicle.speed;
+        
+        float distance = beatAnalyzer.firstBeatOffset * getCurrentSpeed(0f, pathCreator.path.length);
+        
         Int32 currentGroupSize = 0;
         float[] offsets = { -currentVehicle.widthOffset, 0f, currentVehicle.widthOffset };
         // Random offset
@@ -203,7 +227,7 @@ public class CollectibleCreator : MonoBehaviour
         Int32 totalBeats = (Int32)(beatAnalyzer.musicClip.length / secPerBeat);
 
         Int32 startingBeat = Mathf.Min(Mathf.Max(beatsBeforeSpawning, 0), totalBeats - 1);
-        distance += secPerBeat * currentVehicle.speed * startingBeat;
+        distance += secPerBeat * getCurrentSpeed(0f, pathCreator.path.length) * startingBeat;
 
         // Loop through all the beats of the music
         for (var i = startingBeat; i < totalBeats; i++)
@@ -211,22 +235,36 @@ public class CollectibleCreator : MonoBehaviour
 
             if (distance < pathCreator.path.length)
             {
-                Debug.Log(distance);
                 // Spawn collectible
+                GameObject selectedPrefab = getRandomPrefab();
+
                 Vector3 spawnPosition = new Vector3();
+
                 Quaternion spawnRotation = pathCreator.path.GetRotationAtDistance(distance, currentVehicle.endOfPathInstruction) * Quaternion.Euler(0, 0, 90);
 
-                GameObject cube = Instantiate(prefab, spawnPosition, spawnRotation);
-                cube.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                cube.transform.position = pathCreator.path.GetPointAtDistance(distance, currentVehicle.endOfPathInstruction) + (cube.transform.right * spawnOffset) + (cube.transform.up * collectible.heightOffset);
-                cube.transform.parent = transform;
+                GameObject spawnedPrefab = Instantiate(selectedPrefab, spawnPosition, spawnRotation, selectedPrefab.transform.parent);
+                spawnedPrefab.transform.localScale = selectedPrefab.transform.localScale;
+                spawnedPrefab.transform.position = pathCreator.path.GetPointAtDistance(distance, currentVehicle.endOfPathInstruction) + (spawnedPrefab.transform.right * spawnOffset) + (spawnedPrefab.transform.up * selectedPrefab.GetComponent<Collectible>().heightOffset);
+                spawnedPrefab.transform.parent = transform;
+                
+                spawnedPrefab.transform.rotation = spawnRotation * selectedPrefab.transform.rotation;
 
-                Collectible cubeCollectible = cube.GetComponent<Collectible>();
-                if (cubeCollectible != null)
+                Collectible currentCollectible = spawnedPrefab.GetComponent<Collectible>();
+                if (currentCollectible != null)
                 {
-                    cubeCollectible.beat = i;
-                    cubeCollectible.offset = spawnOffset;
-                    cubeCollectible.heightOffset = collectible.heightOffset;
+                    currentCollectible.beat = i;
+                    currentCollectible.offset = spawnOffset;
+                    currentCollectible.heightOffset = selectedPrefab.GetComponent<Collectible>().heightOffset;
+                }
+
+                
+                if (spawnedPrefab.GetComponent<LaneSwitch>() != null) {
+                    // get the offset index base on offsets array
+                    int offsetIndex = Array.IndexOf(offsets, spawnOffset);
+
+                    Debug.Log("Offset index: " + offsetIndex);
+                    
+                    spawnedPrefab.GetComponent<LaneSwitch>().setMaterialbyLane(offsetIndex);
                 }
 
                 currentGroupSize++;
@@ -252,7 +290,7 @@ public class CollectibleCreator : MonoBehaviour
                 multiplier = beatsBetweenSpawn + 1;
             }
 
-            distance += secPerBeat * currentVehicle.speed * multiplier;
+            distance += secPerBeat * getCurrentSpeed(distance, pathCreator.path.length) * multiplier;
         }
     }
 
@@ -289,6 +327,43 @@ public class CollectibleCreator : MonoBehaviour
         collectible.transform.parent = transform;
     }
 
+    private float getCurrentSpeed(float distance, float pathLength)
+    {
+        if (speedVariationsList.Length == 0) 
+            return vehicle.GetComponent<PathFollower>().speed;
+
+        float progressPercentage = (distance / pathLength) * 100f;
+
+        float maxSpeed = speedVariationsList[0].speed;
+
+        foreach (SpeedVariation variation in speedVariationsList)
+        {
+            if (progressPercentage >= variation.percentage)
+            {
+                maxSpeed = variation.speed;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return maxSpeed;
+    }
+
+    private GameObject getRandomPrefab()
+    {
+        float randomValue = UnityEngine.Random.Range(0f, 100f);
+        if ((randomValue < obstacleSpawnChance) && (obstaclePrefabs.Length > 0))
+        {
+            return obstaclePrefabs[UnityEngine.Random.Range(0, obstaclePrefabs.Length)];
+        }
+        else
+        {
+            return prefabs[UnityEngine.Random.Range(0, prefabs.Length)];
+        }
+    }    
+
     [System.Serializable]
     public struct SaveObject
     {
@@ -305,6 +380,7 @@ public class CollectibleCreator : MonoBehaviour
         public float offset;
         public float heightOffset;
         public Vector3 scale;
+        public Quaternion rotation;
     }
 
     [System.Serializable]
