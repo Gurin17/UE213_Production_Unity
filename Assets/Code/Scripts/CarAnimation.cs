@@ -17,7 +17,8 @@ public class CarAnimation : MonoBehaviour
     private bool isLeaning = false;
 
     [Header("Hit Animation")]
-    public float hitAnimationDuration = 0.5f;
+    public AudioClip HitSound;
+    public float hitAnimationDuration = 0.8f;
     public Material hitMaterial;
     public GameObject[] elementsToChangeColor; 
 
@@ -74,7 +75,7 @@ public class CarAnimation : MonoBehaviour
     {
 
         AudioSource carAudioSource = car.GetComponent<AudioSource>();
-        ReduceMusicVolumeOnHit(carAudioSource, 0.2f, 0.5f);
+        ReduceMusicVolumeOnHit(carAudioSource, 0.2f, 0.8f);
 
         foreach (GameObject element in elementsToChangeColor)
         {
@@ -127,6 +128,11 @@ public void ReduceMusicVolumeOnHit(AudioSource musicSource, float reducedVolume,
     if (musicSource != null)
     {
         StartCoroutine(HandleMusicVolumeReduction(musicSource, reducedVolume, duration));
+        // play the hit sound
+        if (HitSound != null)
+        {
+            musicSource.PlayOneShot(HitSound);
+        }
     }
 }
     private IEnumerator HandleMusicVolumeReduction(AudioSource musicSource, float reducedVolume, float duration)
