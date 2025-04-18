@@ -47,7 +47,7 @@ public class Collectible : MonoBehaviour
             if (isObstacle)
             {
                 ScoreManager.instance.looseCombo();
-                Destroy(gameObject);
+                CarAnimation.instance.playHitAnimation();
                 return;
             }
 

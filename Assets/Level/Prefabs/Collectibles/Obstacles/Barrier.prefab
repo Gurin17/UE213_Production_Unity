@@ -125,3 +125,4 @@ MonoBehaviour:
   heightOffset: 0.4
   beat: 0
   offset: 0
+  isObstacle: 1
