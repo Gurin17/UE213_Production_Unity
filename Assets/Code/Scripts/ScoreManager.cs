@@ -13,14 +13,18 @@ public class ScoreManager : MonoBehaviour
     public Slider comboSlider;
 
     [Header("Score Settings")]
-    public float baseScoreIncrement = 1f; // Points ajoutés par intervalle
-    public float scoreUpdateInterval = 0.1f; // Intervalle en secondes pour augmenter le score
+    public float baseScoreIncrement = 1f;
+    public float scoreUpdateInterval = 0.1f;
+
+    [Header("Game End Settings")]
+    public GameObject finalScoreUI;
+    public AudioClip finishSound;
 
     [Header("Combo Settings")]
-    public float comboDecayRate = 0.1f; // Vitesse de diminution de base du combo progress
-    public float comboDecayMultiplierFactor = 0.05f; // Facteur de diminution supplémentaire par niveau de combo
-    public float comboIncrement = 0.2f; // Valeur ajoutée au combo progress par collecte
-    public float comboResetThreshold = 0.99f; // Valeur à laquelle le combo progress redémarre après une réduction du multiplicateur
+    public float comboDecayRate = 0.1f;
+    public float comboDecayMultiplierFactor = 0.05f;
+    public float comboIncrement = 0.2f;
+    public float comboResetThreshold = 0.99f;
 
     [Header("Car Settings")]
     public GameObject vehicle;
@@ -46,6 +50,7 @@ public class ScoreManager : MonoBehaviour
     {
         UpdateUI();
         scoreCoroutine = StartCoroutine(IncreaseScoreOverTime());
+        finalScoreUI.SetActive(false);
     }
 
     void Update()
@@ -56,6 +61,13 @@ public class ScoreManager : MonoBehaviour
         {
             float musicProgress = carAudioSource.time / carAudioSource.clip.length;
             percentText.text = $"{Mathf.RoundToInt(musicProgress * 100)}%";
+
+            if (musicProgress >= 1f)
+            {
+                displayFinalScore();
+                carAudioSource.Stop();
+
+            }
         }
 
         if (comboProgress > 0f)
@@ -123,5 +135,13 @@ public class ScoreManager : MonoBehaviour
         {
             StopCoroutine(scoreCoroutine);
         }
+    }
+
+    void displayFinalScore()
+    {
+        vehicle.GetComponent<AudioSource>().PlayOneShot(finishSound);
+
+        finalScoreUI.SetActive(true);
+        Time.timeScale = 0f;
     }
 }
