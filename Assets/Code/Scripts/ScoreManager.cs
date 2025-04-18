@@ -90,7 +90,7 @@ public class ScoreManager : MonoBehaviour
     {
         comboProgress += progress;
 
-        if (comboProgress >= 1f)
+        if (comboProgress >= 0.99f)
         {
             comboMultiplier++;
             comboProgress -= 1f;
