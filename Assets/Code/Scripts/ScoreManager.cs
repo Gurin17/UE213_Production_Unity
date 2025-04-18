@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
     public float scoreUpdateInterval = 0.1f;
 
     [Header("Game End Settings")]
-    public GameObject finalScoreUI;
+    public GameObject UIManager;
     public AudioClip finishSound;
 
     [Header("Combo Settings")]
@@ -50,7 +50,6 @@ public class ScoreManager : MonoBehaviour
     {
         UpdateUI();
         scoreCoroutine = StartCoroutine(IncreaseScoreOverTime());
-        finalScoreUI.SetActive(false);
     }
 
     void Update()
@@ -64,9 +63,9 @@ public class ScoreManager : MonoBehaviour
 
             if (musicProgress >= 1f)
             {
-                displayFinalScore();
                 carAudioSource.Stop();
-
+                vehicle.GetComponent<AudioSource>().PlayOneShot(finishSound);
+                UIManager.GetComponent<EndMenu>().showFinalScore(score);
             }
         }
 
@@ -135,13 +134,5 @@ public class ScoreManager : MonoBehaviour
         {
             StopCoroutine(scoreCoroutine);
         }
-    }
-
-    void displayFinalScore()
-    {
-        vehicle.GetComponent<AudioSource>().PlayOneShot(finishSound);
-
-        finalScoreUI.SetActive(true);
-        Time.timeScale = 0f;
     }
 }
