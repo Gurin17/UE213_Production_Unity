@@ -659,6 +659,7 @@ MonoBehaviour:
   duration: 0.3
   angle: 20
   rotationAxis: {x: 0, y: 0, z: -1}
+  HitSound: {fileID: 0}
   hitAnimationDuration: 0.7
   hitMaterial: {fileID: 2100000, guid: 6ba5cb7147e915a42a665859ac0d6441, type: 2}
   elementsToChangeColor:
