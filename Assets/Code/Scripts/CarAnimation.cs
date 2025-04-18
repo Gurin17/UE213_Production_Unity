@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Collections;
 
 public class CarAnimation : MonoBehaviour
 {
     public static CarAnimation instance;
+    public GameObject car;
 
     public AnimationCurve curve;               // Must go 0 → 1 → 0
     public float duration = 0.5f;              // Total time for the lean animation
@@ -70,8 +72,9 @@ public class CarAnimation : MonoBehaviour
 
     public void playHitAnimation()
     {
-        // offset the car
-        
+
+        AudioSource carAudioSource = car.GetComponent<AudioSource>();
+        ReduceMusicVolumeOnHit(carAudioSource, 0.2f, 0.5f);
 
         foreach (GameObject element in elementsToChangeColor)
         {
@@ -116,6 +119,25 @@ public class CarAnimation : MonoBehaviour
                 }
             }
         }
+    }
+
+
+public void ReduceMusicVolumeOnHit(AudioSource musicSource, float reducedVolume, float duration)
+{
+    if (musicSource != null)
+    {
+        StartCoroutine(HandleMusicVolumeReduction(musicSource, reducedVolume, duration));
+    }
+}
+    private IEnumerator HandleMusicVolumeReduction(AudioSource musicSource, float reducedVolume, float duration)
+    {
+        float originalVolume = musicSource.volume;
+
+        musicSource.volume = reducedVolume;
+
+        yield return new WaitForSeconds(duration);
+
+        musicSource.volume = originalVolume;
     }
 }
 
