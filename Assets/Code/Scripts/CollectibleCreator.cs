@@ -261,8 +261,6 @@ public class CollectibleCreator : MonoBehaviour
                 if (spawnedPrefab.GetComponent<LaneSwitch>() != null) {
                     // get the offset index base on offsets array
                     int offsetIndex = Array.IndexOf(offsets, spawnOffset);
-
-                    Debug.Log("Offset index: " + offsetIndex);
                     
                     spawnedPrefab.GetComponent<LaneSwitch>().setMaterialbyLane(offsetIndex);
                 }

@@ -126,7 +126,7 @@ MonoBehaviour:
   heightOffset: 0.25
   beat: 0
   offset: 0
-  isObstacle: 0
+  isObstacle: 1
 --- !u!114 &-1833934629652860001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,4 +142,3 @@ MonoBehaviour:
   leftLaneMaterial: {fileID: 2100000, guid: 17d75d1e92bc7b142ac3123417ca5554, type: 2}
   rightLaneMaterial: {fileID: 2100000, guid: 58922f82811eea1409daeddb7fbeac67, type: 2}
   centerLaneMaterial: {fileID: 2100000, guid: e8bc0a956ce9141419964939c7e45582, type: 2}
-  lanee: 0
