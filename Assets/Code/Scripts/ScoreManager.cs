@@ -45,7 +45,6 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         UpdateUI();
-        // Démarre la coroutine pour augmenter le score
         scoreCoroutine = StartCoroutine(IncreaseScoreOverTime());
     }
 
@@ -69,9 +68,8 @@ public class ScoreManager : MonoBehaviour
         }
         else if (comboMultiplier > 1)
         {
-            // Réduit le combo multiplier si le slider est à 0
             comboMultiplier--;
-            comboProgress = comboResetThreshold; // Redémarre le slider juste en dessous de 1
+            comboProgress = comboResetThreshold;
         }
 
         UpdateUI();
@@ -81,14 +79,12 @@ public class ScoreManager : MonoBehaviour
     {
         comboProgress += progress;
 
-        // Si le slider dépasse 1, augmente le combo
         if (comboProgress >= 1f)
         {
             comboMultiplier++;
-            comboProgress -= 1f; // Reporte l'excédent
+            comboProgress -= 1f;
         }
 
-        // Met à jour le slider
         comboSlider.value = comboProgress;
 
         UpdateUI();
@@ -104,7 +100,6 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        // Update score, combo multiplier text, and slider value
         scoreText.text = $"{score}";
         comboMultiplierText.text = $"x{comboMultiplier}";   
         comboSlider.value = comboProgress;
@@ -114,12 +109,10 @@ public class ScoreManager : MonoBehaviour
     {
         while (true)
         {
-            // Increase the score based on the comboMultiplier
             score += Mathf.RoundToInt(baseScoreIncrement * comboMultiplier);
 
             UpdateUI();
 
-            // Wait for the defined interval before the next increment
             yield return new WaitForSeconds(scoreUpdateInterval);
         }
     }

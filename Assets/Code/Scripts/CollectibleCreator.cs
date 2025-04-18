@@ -170,6 +170,11 @@ public class CollectibleCreator : MonoBehaviour
 
                 Collectible collectibleScript = collectible.GetComponent<Collectible>();
 
+                if (collectible.GetComponent<LaneSwitch>() != null) {
+                    int offsetIndex = Array.IndexOf(new float[] { -vehicleData.widthOffset, 0f, vehicleData.widthOffset }, collectibleData.offset);                    
+                    collectible.GetComponent<LaneSwitch>().setMaterialbyLane(offsetIndex);
+                }
+
                 if (collectibleScript != null)
                 {
                     collectibleScript.type = collectibleData.type;
