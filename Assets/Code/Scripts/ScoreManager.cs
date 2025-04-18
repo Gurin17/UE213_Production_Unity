@@ -61,7 +61,7 @@ public class ScoreManager : MonoBehaviour
             float musicProgress = carAudioSource.time / carAudioSource.clip.length;
             percentText.text = $"{Mathf.RoundToInt(musicProgress * 100)}%";
 
-            if (musicProgress >= 1f)
+            if (musicProgress >= 0.99f)
             {
                 carAudioSource.Stop();
                 vehicle.GetComponent<AudioSource>().PlayOneShot(finishSound);
@@ -90,7 +90,7 @@ public class ScoreManager : MonoBehaviour
     {
         comboProgress += progress;
 
-        if (comboProgress >= 0.99f)
+        if (comboProgress >= 1f)
         {
             comboMultiplier++;
             comboProgress -= 1f;
